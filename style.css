@@ -1,0 +1,481 @@
+```css
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background:
+        radial-gradient(circle at center, #ffffff 0%, #e8e8e8 100%);
+
+    color: #222;
+
+    font-family: Arial, sans-serif;
+
+    overflow: hidden;
+}
+
+
+/* قاب اصلی */
+
+.box,
+.game {
+    text-align: center;
+
+    background: #d6d6d6;
+
+    padding: 28px;
+
+    border-radius: 24px;
+
+    border: 4px solid #333;
+
+    box-shadow:
+        0 8px 0 #777,
+        0 15px 30px rgba(0,0,0,0.25);
+
+    min-width: 340px;
+
+    position: relative;
+}
+
+
+/* عنوان */
+
+h1 {
+    margin: 0 0 18px 0;
+
+    font-family: monospace;
+
+    font-size: 30px;
+
+    letter-spacing: 2px;
+
+    color: #222;
+
+    text-shadow:
+        2px 2px 0 #fff;
+}
+
+
+/* نام بازیکن */
+
+#player,
+#role {
+
+    color: #222;
+
+    font-family: monospace;
+
+    font-size: 18px;
+
+    font-weight: bold;
+
+    margin-bottom: 10px;
+}
+
+
+/* وضعیت بازی */
+
+#status {
+
+    display: inline-block;
+
+    min-width: 190px;
+
+    padding: 9px 14px;
+
+    margin: 8px 0 20px;
+
+    border-radius: 8px;
+
+    background: #252525;
+
+    color: #9cff9c;
+
+    border: 3px solid #111;
+
+    font-family: monospace;
+
+    font-size: 16px;
+
+    box-shadow:
+        inset 0 2px 5px rgba(0,0,0,0.5);
+}
+
+
+/* برد */
+
+.board {
+
+    display: grid;
+
+    grid-template-columns: repeat(3, 90px);
+
+    grid-template-rows: repeat(3, 90px);
+
+    gap: 7px;
+
+    padding: 10px;
+
+    margin: auto;
+
+    width: max-content;
+
+    background: #444;
+
+    border: 5px solid #222;
+
+    border-radius: 12px;
+
+    box-shadow:
+        inset 0 0 0 3px #777,
+        0 5px 0 #111;
+}
+
+
+/* خانه های بازی */
+
+.cell {
+
+    width: 90px;
+
+    height: 90px;
+
+    padding: 0;
+
+    border: 3px solid #777;
+
+    border-radius: 7px;
+
+    background:
+        linear-gradient(
+            145deg,
+            #eeeeee,
+            #c9c9c9
+        );
+
+    cursor: pointer;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    box-shadow:
+        inset 2px 2px 0 #fff,
+        inset -3px -3px 0 #999;
+
+    transition:
+        transform 0.08s,
+        background 0.15s;
+}
+
+
+/* افکت فشار دادن خانه */
+
+.cell:active {
+
+    transform: translateY(3px);
+
+    box-shadow:
+        inset 2px 2px 0 #999,
+        inset -2px -2px 0 #fff;
+}
+
+
+/* هاور */
+
+.cell:hover:not(:disabled) {
+
+    background:
+        linear-gradient(
+            145deg,
+            #ffffff,
+            #d5d5d5
+        );
+}
+
+
+/* خانه های غیر فعال */
+
+.cell:disabled {
+
+    cursor: default;
+}
+
+
+/* تصاویر X و O */
+
+.cell img {
+
+    width: 68px;
+
+    height: 68px;
+
+    object-fit: contain;
+
+    image-rendering: pixelated;
+
+    pointer-events: none;
+
+    user-select: none;
+
+    animation: pixelPop 0.15s ease-out;
+}
+
+
+/* انیمیشن ورود مهره */
+
+@keyframes pixelPop {
+
+    0% {
+        transform: scale(0.4);
+        opacity: 0;
+    }
+
+    70% {
+        transform: scale(1.08);
+        opacity: 1;
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+
+/* دکمه ها */
+
+button {
+
+    font-family: monospace;
+
+    font-weight: bold;
+}
+
+
+/* دکمه شروع دوباره */
+
+#restart {
+
+    margin-top: 20px;
+
+    padding: 11px 25px;
+
+    border: 3px solid #222;
+
+    border-radius: 9px;
+
+    background: #e7b83f;
+
+    color: #222;
+
+    font-size: 16px;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 4px 0 #8a6b16;
+
+    transition: 0.1s;
+}
+
+
+#restart:hover {
+
+    background: #f2ca59;
+}
+
+
+#restart:active {
+
+    transform: translateY(4px);
+
+    box-shadow:
+        0 0 0 #8a6b16;
+}
+
+
+/* ورودی نام */
+
+input {
+
+    width: 90%;
+
+    padding: 12px;
+
+    margin: 10px;
+
+    border-radius: 8px;
+
+    border: 3px solid #555;
+
+    background: #f5f5f5;
+
+    color: #222;
+
+    font-family: monospace;
+
+    font-size: 16px;
+
+    outline: none;
+
+    box-shadow:
+        inset 2px 2px 5px rgba(0,0,0,0.15);
+}
+
+
+input:focus {
+
+    border-color: #222;
+
+    background: #fff;
+}
+
+
+/* دکمه ورود و دکمه دعوت */
+
+button {
+
+    padding: 10px 24px;
+
+    border: 3px solid #222;
+
+    border-radius: 8px;
+
+    background: #e7b83f;
+
+    color: #222;
+
+    cursor: pointer;
+
+    font-size: 16px;
+
+    box-shadow:
+        0 4px 0 #8a6b16;
+}
+
+
+button:active {
+
+    transform: translateY(3px);
+
+    box-shadow:
+        0 1px 0 #8a6b16;
+}
+
+
+/* بازیکنان لابی */
+
+.player {
+
+    background: #eeeeee;
+
+    margin: 10px 0;
+
+    padding: 12px;
+
+    border-radius: 9px;
+
+    border: 3px solid #555;
+
+    color: #222;
+
+    font-family: monospace;
+
+    box-shadow:
+        0 3px 0 #999;
+}
+
+
+/* دکمه داخل کارت بازیکن */
+
+.player button {
+
+    margin-top: 8px;
+
+    padding: 7px 18px;
+
+    font-size: 14px;
+}
+
+
+/* پیام دعوت */
+
+#invite {
+
+    margin-top: 15px;
+
+    padding: 12px;
+
+    border-radius: 10px;
+
+    background: #252525;
+
+    color: #fff;
+
+    border: 3px solid #111;
+
+    font-family: monospace;
+}
+
+
+/* موبایل */
+
+@media (max-width: 500px) {
+
+    .box,
+    .game {
+
+        min-width: 0;
+
+        width: 92%;
+
+        padding: 20px;
+
+    }
+
+
+    .board {
+
+        grid-template-columns: repeat(3, 75px);
+
+        grid-template-rows: repeat(3, 75px);
+
+    }
+
+
+    .cell {
+
+        width: 75px;
+
+        height: 75px;
+
+    }
+
+
+    .cell img {
+
+        width: 58px;
+
+        height: 58px;
+
+    }
+
+
+    h1 {
+
+        font-size: 24px;
+
+    }
+
+}
+```
