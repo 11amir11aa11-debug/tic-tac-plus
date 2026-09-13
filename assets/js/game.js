@@ -400,15 +400,23 @@ document.getElementById("status").innerHTML=
 cells.forEach((cell,index)=>{
 
 
-cell.onclick=async()=>{
+cell.onclick = async()=>{
 
 
-await fetch("/move",{
+if(!player) return;
+
+
+try {
+
+
+let r = await fetch("/move",{
 
 method:"POST",
 
 headers:{
+
 "Content-Type":"application/json"
+
 },
 
 body:JSON.stringify({
@@ -422,14 +430,40 @@ index:index
 });
 
 
-getGame();
+let data = await r.json();
+
+
+
+if(data.error){
+
+document.getElementById("status").innerHTML =
+"⚠️ " + data.error;
+
+return;
+
+}
+
+
+
+updateGame(data);
+
+
+
+}
+catch(e){
+
+
+document.getElementById("status").innerHTML =
+"❌ خطا در اتصال به سرور";
+
+
+}
 
 
 };
 
 
 });
-
 
 
 
