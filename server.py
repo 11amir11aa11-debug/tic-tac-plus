@@ -289,17 +289,16 @@ class GameServer(http.server.SimpleHTTPRequestHandler):
 
 
                     game["board"] = [
-
-                        "",
-                        "",
-                        "",
-                        "",
-                        "",
-                        "",
-                        "",
-                        ""
-
-                    ]
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    ""
+]
 
 
                     game["turn"] = "X"
@@ -502,17 +501,16 @@ class GameServer(http.server.SimpleHTTPRequestHandler):
             with lock:
 
                 game["board"] = [
-
-                    "",
-                    "",
-                    "",
-                    "",
-                    "",
-                    "",
-                    "",
-                    ""
-
-                ]
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    ""
+]
 
                 game["turn"] = "X"
 
