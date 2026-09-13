@@ -23,6 +23,7 @@ game = {
         "",
         "",
         "",
+        "",
         ""
     ],
     "turn": "X",
@@ -109,6 +110,9 @@ class GameServer(http.server.SimpleHTTPRequestHandler):
 
 
     def do_POST(self):
+
+
+        print("POST REQUEST:", self.path)
 
 
         length = int(
@@ -363,6 +367,12 @@ class GameServer(http.server.SimpleHTTPRequestHandler):
         # حرکت
 
         if self.path == "/move":
+
+
+            print("MOVE DATA:", data)
+
+            print("CURRENT BOARD:", game["board"])
+
 
             try:
 
